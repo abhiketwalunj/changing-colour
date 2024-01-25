@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
-function App() {
+const ColorChanger = () => {
+  const colors = ['Red', 'Yellow', 'Blue', 'Green', 'Brown', 'Orange', 'Gray', 'Wheat', 'Pink', 'Purple', 'Indigo', 'Violet', 'Skyblue','Maroon'];
+  const [selectedColor, setSelectedColor] = useState(null);
+
+  const handleColorClick = (color) => {
+    document.body.style.backgroundColor = color;
+    setSelectedColor(color); 
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="color-container">
+      {colors.map((color, index) => (
+        <div
+          key={index}
+          className="color-box"
+          style={{ backgroundColor: selectedColor === color ? 'white' : color }}
+          onClick={() => handleColorClick(color)}
         >
-          Learn React
-        </a>
-      </header>
+          {color}
+        </div>
+      ))}
     </div>
   );
-}
+};
 
-export default App;
+export default ColorChanger;
